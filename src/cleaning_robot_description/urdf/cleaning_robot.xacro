@@ -1,0 +1,138 @@
+<?xml version="1.0" ?>
+<robot name="cleaning_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find cleaning_robot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find cleaning_robot_description)/urdf/cleaning_robot.trans" />
+<xacro:include filename="$(find cleaning_robot_description)/urdf/cleaning_robot.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.04437838792509645 -0.1000005943178517 0.05601957260904838" rpy="0 0 0"/>
+    <mass value="4.791754555008142"/>
+    <inertia ixx="0.031334" iyy="0.033013" izz="0.061423" ixy="0.0" iyz="0.0" ixz="2.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="4.225560589210531e-07 -0.0124999999999999 4.412303293496733e-07" rpy="0 0 0"/>
+    <mass value="0.07715064333823558"/>
+    <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.086734 0.175 -0.035405" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.086734 0.175 -0.035405" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="4.2255605858798617e-07 0.012499999999999041 4.412303297104958e-07" rpy="0 0 0"/>
+    <mass value="0.07715064333823558"/>
+    <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.086734 0.025 -0.035405" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.086734 0.025 -0.035405" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Camera_1">
+  <inertial>
+    <origin xyz="0.0025004225560568555 -3.785761643060326e-07 1.1586509461591898e-07" rpy="0 0 0"/>
+    <mass value="0.0030826877913351157"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.123266 0.100296 -0.059968" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.123266 0.100296 -0.059968" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="4.2255606019087066e-07 -1.3877787807814457e-16 0.01000044123033178" rpy="0 0 0"/>
+    <mass value="0.059941587830493234"/>
+    <inertia ixx="1.5e-05" iyy="1.5e-05" izz="2.7e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.046734 0.1 -0.095405" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.046734 0.1 -0.095405" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cleaning_robot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute_1" type="continuous">
+  <origin xyz="-0.086734 -0.175 0.035405" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Revolute_2" type="continuous">
+  <origin xyz="-0.086734 -0.025 0.035405" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rigid 7" type="fixed">
+  <origin xyz="0.123266 -0.100296 0.059968" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Camera_1"/>
+</joint>
+
+<joint name="Rigid 8" type="fixed">
+  <origin xyz="-0.046734 -0.1 0.095405" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+</robot>

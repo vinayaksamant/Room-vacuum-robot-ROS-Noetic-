@@ -1,0 +1,10 @@
+<launch>
+  <arg name="world_file" default="$ (find cleaning_robot_description)/urdf/human_world.world"/>
+  <arg name="gui" default="true"/>
+  
+  <!-- Launch Gazebo with the specified world file -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_file)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+</launch>

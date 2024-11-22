@@ -1,0 +1,18 @@
+<launch>
+  <!-- Launch Gazebo with your world file -->
+  <include file="$(find xacro)/xacro $(find cleaning_robot_description)/launch/gazebo.launch" />
+
+  <!-- Load the map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="/home/vinayak/my_map.yaml" />
+
+  <!-- Run the dynamic obstacle navigator -->
+  <node name="dynamic_obstacle_navigator" pkg="cleaning_robot_description" type="dynamic_obstacle_navigator.py" output="screen">
+    <param name="map_yaml_path" value="/home/vinayak/my_map.yaml" />
+    <param name="laser_topic" value="/scan" />
+    <param name="robot_frame" value="base_link" />
+    <param name="map_frame" value="map" />
+    <param name="distance_threshold" value="0.1" />
+    <param name="max_linear_speed" value="0.5" />
+    <param name="max_angular_speed" value="1.0" />
+  </node>
+</launch>

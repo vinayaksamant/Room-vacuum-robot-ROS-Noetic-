@@ -1,0 +1,2 @@
+cleaning_robot_description:myrobot_description
+-DCATKIN_DEVEL_PREFIX=/home/vinayak/cleaning_robot/devel -DCMAKE_INSTALL_PREFIX=/home/vinayak/cleaning_robot/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/home/vinayak/cleaning_robot/devel
+
+Name: cleaning_robot
+Description: Description of cleaning_robot
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

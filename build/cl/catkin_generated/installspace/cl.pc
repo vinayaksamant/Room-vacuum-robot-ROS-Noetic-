@@ -1,0 +1,8 @@
+prefix=/home/vinayak/cleaning_robot/install
+
+Name: cl
+Description: Description of cl
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

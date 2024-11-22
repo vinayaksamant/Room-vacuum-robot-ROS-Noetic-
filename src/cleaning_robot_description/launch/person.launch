@@ -1,0 +1,24 @@
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro $(find cleaning_robot_description)/urdf/cleaning_robot.xacro"/>
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model cleaning_robot -x=0.5 -y=0.5 -Y=0"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <arg name="world_name" value="$(find cleaning_robot_description)/worlds/final_room.world "/> -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include> 
+
+  <node name="person_1" pkg="gazebo_ros" type="spawn_model" args="-file $(find cleaning_robot_description)/urdf/person_standing/model.sdf -sdf -model additional_model_1 -x 3.0 -y 0.2 -Y -1.571428571"/>
+
+  
+  <node name="person_2" pkg="gazebo_ros" type="spawn_model" args="-file $(find cleaning_robot_description)/urdf/person_standing/model.sdf -sdf -model additional_model_2 -x 4.5 -y 3.5 -Y 1.571428571"/>
+
+  <!-- Spawn the first instance of the SDF model -->
+  <!-- <node name="spawn_sdf_model_1" pkg="gazebo_ros" type="spawn_model" args="-file $(find cleaning_robot_description)/models/model.sdf -sdf -model additional_model_1 -x 1.0 -y 1.0 -Y 0"/> -->
+  
+  <!-- Spawn the second instance of the SDF model -->
+  <!-- <node name="spawn_sdf_model_2" pkg="gazebo_ros" type="spawn_model" args="-file $(find cleaning_robot_description)/models/model.sdf -sdf -model additional_model_2 -x 2.0 -y 2.0 -Y 0"/> -->
+
+</launch>

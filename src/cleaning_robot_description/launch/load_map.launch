@@ -1,0 +1,62 @@
+<launch>
+  <!-- Load the map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="/home/vinayak/my_map.yaml" output="screen"/>
+
+  <!-- Start AMCL -->
+  <node name="amcl" pkg="amcl" type="amcl" output="screen">
+    <param name="odom_frame_id" value="odom"/>
+    <param name="base_frame_id" value="base_link"/>
+    <param name="global_frame_id" value="map"/>
+    <param name="update_min_d" value="0.2"/>
+    <param name="update_min_a" value="0.5"/>
+    <param name="odom_alpha1" value="0.2"/>
+    <param name="odom_alpha2" value="0.2"/>
+    <param name="odom_alpha3" value="0.2"/>
+    <param name="odom_alpha4" value="0.2"/>
+    <param name="odom_alpha5" value="0.1"/>
+    <param name="laser_lambda_short" value="0.1"/>
+    <param name="laser_model_type" value="likelihood_field"/>
+    <param name="min_particles" value="500"/>
+    <param name="max_particles" value="2000"/>
+    <param name="kld_err" value="0.02"/>
+    <param name="kld_z" value="0.99"/>
+    <param name="odom_model_type" value="diff"/>
+    <param name="z_hit" value="0.5"/>
+    <param name="z_short" value="0.05"/>
+    <param name="z_max" value="0.05"/>
+    <param name="z_rand" value="0.5"/>
+    <param name="sigma_hit" value="0.2"/>
+    <param name="tf_broadcast" value="true"/>
+    <remap from="scan" to="/scan"/>
+  </node>
+
+    <!-- AMCL
+  <node name="amcl" pkg="amcl" type="amcl" output="screen">
+    <param name="odom_frame_id" value="odom" />
+    <param name="base_frame_id" value="base_link" />
+    <param name="global_frame_id" value="map" />
+    <param name="scan_topic" value="scan" />
+  </node> -->
+
+  <!-- Start robot state publisher (optional, but recommended) -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="use_sim_time" value="true"/>
+    <param name="publish_frequency" value="50.0"/>
+  </node>
+
+  <!-- Move Base -->
+  <node name="move_base" pkg="move_base" respawn="false" type="move_base" output="screen">
+    <rosparam file="$(find cleaning_robot_description)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find cleaning_robot_description)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find cleaning_robot_description)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find cleaning_robot_description)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find cleaning_robot_description)/config/base_local_planner.yaml" command="load" /> 
+    <!-- <remap from="cmd_vel" 
+        to="$(arg cmd_vel_topic)"/>
+
+    <remap from="odom" 
+            to="$(arg odom_topic)"/> -->
+  </node>  
+</launch>
+
+
